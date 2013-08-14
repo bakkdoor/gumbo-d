@@ -34,7 +34,7 @@ int main(string[] argv) {
 
     string filename = argv[1];
 
-    if(!dirEntry(filename).isFile) {
+    scope(failure) {
         stderr.writeln("Error: ", filename, " is not a file");
         usage();
         return 1;
