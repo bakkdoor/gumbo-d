@@ -4,22 +4,27 @@ import std.stdio, std.file;
 import std.string : toStringz;
 import std.conv : text;
 
-static void find_links(GumboNode* node) {
+string[] find_links(GumboNode* node) {
+    string[] links;
+
     if (node.type != GumboNodeType.GUMBO_NODE_ELEMENT) {
-        return;
+        return links;
     }
+
     GumboAttribute* href;
     if (node.v.element.tag == GumboTag.GUMBO_TAG_A) {
         href = gumbo_get_attribute(&node.v.element.attributes, "href");
         if(href) {
-            writeln(text(href.value));
+            links ~= text(href.value);
         }
     }
 
     GumboVector* children = &node.v.element.children;
     for (int i = 0; i < children.length; ++i) {
-        find_links(cast(GumboNode*) children.data[i]);
+        links ~= find_links(cast(GumboNode*) children.data[i]);
     }
+
+    return links;
 }
 
 void usage() {
@@ -43,7 +48,9 @@ int main(string[] argv) {
     string contents = readText(filename);
 
     GumboOutput* output = gumbo_parse(toStringz(contents));
-    find_links(output.root);
+    foreach(link; find_links(output.root)) {
+        writeln(link);
+    }
     gumbo_destroy_output(&kGumboDefaultOptions, output);
 
     return 0;
