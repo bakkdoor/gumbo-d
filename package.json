@@ -1,7 +1,7 @@
 {
   "name": "gumbo-d",
   "description": "D bindings for Google's Gumbo HTML5 parser library",
-  "homepage": "https://github.com/bakkdoor/gumbo.d",
+  "homepage": "https://github.com/bakkdoor/gumbo-d",
   "copyright": "Copyright © 2013, Christopher Bertels",
   "authors": [
     "Christopher Bertels"
