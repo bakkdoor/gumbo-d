@@ -4,8 +4,6 @@ import std.stdio, std.file;
 import std.string : toStringz;
 import std.conv : text;
 
-
-
 static void search_for_links(GumboNode* node) {
     if (node.type != GumboNodeType.GUMBO_NODE_ELEMENT) {
         return;
