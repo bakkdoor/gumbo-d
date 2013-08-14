@@ -22,13 +22,24 @@ static void find_links(GumboNode* node) {
     }
 }
 
+void usage() {
+    stderr.writeln("Usage: find_links <html filename>");
+}
+
 int main(string[] argv) {
     if (argv.length != 2) {
-        writeln("Usage: find_links <html filename>.");
+        usage();
         return 1;
     }
 
     string filename = argv[1];
+
+    if(!dirEntry(filename).isFile) {
+        stderr.writeln("Error: ", filename, " is not a file");
+        usage();
+        return 1;
+    }
+
     string contents = readText(filename);
 
     GumboOutput* output = gumbo_parse(toStringz(contents));
