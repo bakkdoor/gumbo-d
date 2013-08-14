@@ -1,5 +1,5 @@
 {
-  "name": "gumbo.d",
+  "name": "gumbo-d",
   "description": "Gumbo HTML 5 Parser D Bindings",
   "homepage": "https://github.com/bakkdoor/gumbo.d",
   "copyright": "Copyright © 2013, Christopher Bertels",
