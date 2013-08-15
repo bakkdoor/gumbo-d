@@ -6,6 +6,15 @@ import std.conv : text;
 import std.stdio;
 
 class Node {
+    enum Type {
+        DOCUMENT,
+        ELEMENT,
+        TEXT,
+        CDATA,
+        COMMENT,
+        WHITESPACE
+    };
+
 private:
     GumboNode * _node;
     //Node _parent;
@@ -38,20 +47,20 @@ public:
             return null;
 
         switch(node.type) {
-            case GumboNodeType.GUMBO_NODE_DOCUMENT:
-                return new Document(node);
-            case GumboNodeType.GUMBO_NODE_ELEMENT:
-                return new Element(node);
-            case GumboNodeType.GUMBO_NODE_TEXT:
-                return new Text(node);
-            case GumboNodeType.GUMBO_NODE_CDATA:
-                return new Text(node);
-            case GumboNodeType.GUMBO_NODE_COMMENT:
-                return new Text(node);
-            case GumboNodeType.GUMBO_NODE_WHITESPACE:
-                return new Text(node);
+            case Type.DOCUMENT:
+            return new Document(node);
+            case Type.ELEMENT:
+            return new Element(node);
+            case Type.TEXT:
+            return new Text(node);
+            case Type.CDATA:
+            return new Text(node);
+            case Type.COMMENT:
+            return new Text(node);
+            case Type.WHITESPACE:
+            return new Text(node);
             default:
-                return null;
+            return null;
         }
     }
 }
@@ -114,6 +123,24 @@ public:
 }
 
 class Element : Node {
+    enum Tag {
+        HTML, HEAD, TITLE, BASE, LINK, META, STYLE, SCRIPT, NOSCRIPT, BODY,
+        SECTION, NAV, ARTICLE, ASIDE, H1, H2, H3, H4, H5, H6, HGROUP, HEADER,
+        FOOTER, ADDRESS, P, HR, PRE, BLOCKQUOTE, OL, UL, LI, DL, DT, DD,
+        FIGURE, FIGCAPTION, DIV, A, EM, STRONG, SMALL, S, CITE, Q, DFN, ABBR,
+        TIME, CODE, VAR, SAMP, KBD, SUB, SUP, I, B, MARK, RUBY, RT, RP, BDI,
+        BDO, SPAN, BR, WBR, INS, DEL, IMAGE, IMG, IFRAME, EMBED, OBJECT, PARAM,
+        VIDEO, AUDIO, SOURCE, TRACK, CANVAS, MAP, AREA, MATH, MI, MO, MN, MS,
+        MTEXT, MGLYPH, MALIGNMARK, ANNOTATION_XML, SVG, FOREIGNOBJECT, DESC,
+        TABLE, CAPTION, COLGROUP, COL, TBODY, THEAD, TFOOT, TR, TD, TH, FORM,
+        FIELDSET, LEGEND, LABEL, INPUT, BUTTON, SELECT, DATALIST, OPTGROUP,
+        OPTION, TEXTAREA, KEYGEN, OUTPUT, PROGRESS, METER, DETAILS, SUMMARY,
+        COMMAND, MENU, APPLET, ACRONYM, BGSOUND, DIR, FRAME, FRAMESET,
+        NOFRAMES, ISINDEX, LISTING, XMP, NEXTID, NOEMBED, PLAINTEXT, RB,
+        STRIKE, BASEFONT, BIG, BLINK, CENTER, FONT, MARQUEE, MULTICOL, NOBR,
+        SPACER, TT, U, UNKNOWN, LAST,
+    };
+
     GumboElement * _element;
 
     Node[] _children;

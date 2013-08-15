@@ -5,13 +5,13 @@ import std.stdio;
 string[] find_links(gumbo.node.Node node) {
     string[] links;
 
-    if (node.type != GumboNodeType.GUMBO_NODE_ELEMENT) {
+    if (node.type != Node.Type.ELEMENT) {
         return links;
     }
 
     gumbo.node.Element element = cast(gumbo.node.Element) node;
 
-    if (element.tag == GumboTag.GUMBO_TAG_A) {
+    if (element.tag == Element.Tag.A) {
         GumboAttribute* href = element.getAttribute("href");
         if(href) {
             links ~= text(href.value);
