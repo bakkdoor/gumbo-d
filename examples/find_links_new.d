@@ -12,9 +12,9 @@ string[] find_links(Node node) {
     Element element = cast(Element) node;
 
     if (element.tag == Element.Tag.A) {
-        GumboAttribute* href = element.getAttribute("href");
+        Attribute href = element.getAttribute("href");
         if(href) {
-            links ~= text(href.value);
+            links ~= href.value;
         }
     }
 

@@ -46,7 +46,7 @@ public:
         if(!node)
             return null;
 
-        switch(node.type) {
+        switch(cast(Type)node.type) {
             case Type.DOCUMENT:
             return new Document(node);
             case Type.ELEMENT:
@@ -62,6 +62,62 @@ public:
             default:
             return null;
         }
+    }
+}
+
+class Attribute {
+private:
+    GumboAttribute * _attr;
+
+public:
+    this(GumboAttribute * attr)
+    {
+        _attr = attr;
+    }
+
+    GumboAttributeNamespaceEnum attrNamespace()
+    {
+        return _attr.attr_namespace;
+    }
+
+    string name()
+    {
+        return text(_attr.name);
+    }
+
+    string originalName()
+    {
+        return text(_attr.original_name);
+    }
+
+    string value()
+    {
+        return text(_attr.value);
+    }
+
+    string originalValue()
+    {
+        return text(_attr.original_value);
+    }
+
+    GumboSourcePosition nameStart()
+    {
+        return _attr.name_start;
+    }
+
+    GumboSourcePosition nameEnd()
+    {
+        return _attr.name_end;
+    }
+
+    GumboSourcePosition valueStart()
+    {
+        return _attr.value_start;
+    }
+
+    GumboSourcePosition valueEnd()
+    {
+        return _attr.value_end;
     }
 }
 
@@ -144,7 +200,7 @@ class Element : Node {
     GumboElement * _element;
 
     Node[] _children;
-    GumboAttribute*[string] _attributes;
+    Attribute[string] _attributes;
 
 public:
     this(GumboNode * node)
@@ -159,8 +215,8 @@ public:
 
 
         for(uint i = 0; i < _element.attributes.length; i++) {
-            GumboAttribute * attr = cast(GumboAttribute*)_element.attributes.data[i];
-            _attributes[text(attr.name)] = attr;
+            Attribute attr = new Attribute(cast(GumboAttribute*)_element.attributes.data[i]);
+            _attributes[attr.name()] = attr;
         }
     }
 
@@ -169,12 +225,12 @@ public:
         return _children;
     }
 
-    GumboAttribute*[string] attributes()
+    Attribute[string] attributes()
     {
         return _attributes;
     }
 
-    GumboAttribute* getAttribute(string name) {
+    Attribute getAttribute(string name) {
         if(name in _attributes)
             return _attributes[name];
         return null;
