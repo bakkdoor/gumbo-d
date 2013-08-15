@@ -1,8 +1,6 @@
 import gumbo.node, gumbo.capi, gumbo.parse;
 
-import std.stdio, std.file;
-import std.string : toStringz;
-import std.conv : text;
+import std.stdio;
 
 string[] find_links(gumbo.node.Node node) {
     string[] links;
@@ -20,8 +18,7 @@ string[] find_links(gumbo.node.Node node) {
         }
     }
 
-    Node[] children = element.children;
-    foreach(Node child; children) {
+    foreach(child; element.children) {
         links ~= find_links(child);
     }
 
@@ -50,7 +47,7 @@ int main(string[] argv) {
     foreach(link; find_links(output.root)) {
         writeln(link);
     }
-    output.destroy(&kGumboDefaultOptions);
+    output.destroy();
 
     return 0;
 }

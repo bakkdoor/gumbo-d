@@ -21,7 +21,7 @@ public:
         return _root;
     }
 
-    void destroy(const(GumboOptions)* options)
+    void destroy(const(GumboOptions)* options = &kGumboDefaultOptions)
     {
         gumbo_destroy_output(options, _output);
     }
