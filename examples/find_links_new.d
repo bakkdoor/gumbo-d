@@ -2,14 +2,14 @@ import gumbo.node, gumbo.capi, gumbo.parse;
 
 import std.stdio;
 
-string[] find_links(gumbo.node.Node node) {
+string[] find_links(Node node) {
     string[] links;
 
     if (node.type != Node.Type.ELEMENT) {
         return links;
     }
 
-    gumbo.node.Element element = cast(gumbo.node.Element) node;
+    Element element = cast(Element) node;
 
     if (element.tag == Element.Tag.A) {
         GumboAttribute* href = element.getAttribute("href");
