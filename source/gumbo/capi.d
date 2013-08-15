@@ -1,3 +1,5 @@
+module gumbo.capi;
+
 extern (C) {
 
 /**

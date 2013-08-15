@@ -1,4 +1,4 @@
-import gumbo;
+import gumbo.capi;
 
 import std.stdio, std.file;
 import std.string : toStringz;
