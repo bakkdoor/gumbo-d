@@ -1,27 +1,25 @@
-import gumbo.capi;
+import gumbo.node, gumbo.capi, gumbo.parse;
 
-import std.stdio, std.file;
-import std.string : toStringz;
-import std.conv : text;
+import std.stdio;
 
-string[] find_links(GumboNode* node) {
+string[] find_links(Node node) {
     string[] links;
 
-    if (node.type != GumboNodeType.GUMBO_NODE_ELEMENT) {
+    if (node.type != Node.Type.ELEMENT) {
         return links;
     }
 
-    GumboAttribute* href;
-    if (node.v.element.tag == GumboTag.GUMBO_TAG_A) {
-        href = gumbo_get_attribute(&node.v.element.attributes, "href");
+    Element element = cast(Element) node;
+
+    if (element.tag == Element.Tag.A) {
+        Attribute href = element.getAttribute("href");
         if(href) {
-            links ~= text(href.value);
+            links ~= href.value;
         }
     }
 
-    GumboVector* children = &node.v.element.children;
-    for (int i = 0; i < children.length; ++i) {
-        links ~= find_links(cast(GumboNode*) children.data[i]);
+    foreach(child; element.children) {
+        links ~= find_links(child);
     }
 
     return links;
@@ -45,13 +43,11 @@ int main(string[] argv) {
         return 1;
     }
 
-    string contents = readText(filename);
-
-    GumboOutput* output = gumbo_parse(toStringz(contents));
+    gumbo.parse.Output output = gumbo.parse.parseFile(filename);
     foreach(link; find_links(output.root)) {
         writeln(link);
     }
-    gumbo_destroy_output(&kGumboDefaultOptions, output);
+    output.destroy();
 
     return 0;
 }
