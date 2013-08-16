@@ -282,7 +282,12 @@ public:
         super(node);
 
         _gtext = &node.v.text;
-        _text = text(_gtext.text);
+        _text = std.conv.text(_gtext.text);
+    }
+
+    string text()
+    {
+        return _text;
     }
 
     GumboStringPiece originalText()
