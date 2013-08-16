@@ -17,13 +17,16 @@ class Node {
 
 private:
     GumboNode * _node;
-    //Node _parent;
 
 public:
     this(GumboNode * node)
     {
         _node = node;
-        //_parent = Node.fromCAPI(node.parent);
+    }
+
+    Node parent()
+    {
+        return Node.fromCAPI(_node.parent);
     }
 
     GumboNodeType type()
@@ -269,6 +272,7 @@ public:
 }
 
 class Text : Node {
+private:
     GumboText * _gtext;
     string _text;
 
