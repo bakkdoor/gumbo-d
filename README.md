@@ -1,4 +1,4 @@
-# Gumbo.d - D bindings for Google's Gumbo HTML5 parser library
+# Gumbo-d - D bindings for Google's Gumbo HTML5 parser library
 
 This is a simple D binding for the Gumbo HTML5 parser library written in C.
 
