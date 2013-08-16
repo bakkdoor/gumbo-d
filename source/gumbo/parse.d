@@ -25,15 +25,15 @@ public:
     {
         gumbo_destroy_output(options, _output);
     }
-}
 
-Output parseString(string str)
-{
-    GumboOutput *output = gumbo_parse(toStringz(str));
-    return new Output(output);
-}
+    static Output fromFile(string filename)
+    {
+        return fromString(readText(filename));
+    }
 
-Output parseFile(string filename)
-{
-    return parseString(readText(filename));
+    static Output fromString(string str)
+    {
+        GumboOutput *output = gumbo_parse(toStringz(str));
+        return new Output(output);
+    }
 }

@@ -42,7 +42,7 @@ int main(string[] argv) {
         return 1;
     }
 
-    gumbo.parse.Output output = gumbo.parse.parseFile(filename);
+    gumbo.parse.Output output = gumbo.parse.Output.fromFile(filename);
     foreach(link; find_links(output.root)) {
         writeln(link);
     }
