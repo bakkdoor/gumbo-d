@@ -2,7 +2,7 @@ import gumbo.node, gumbo.capi, gumbo.parse;
 
 import std.stdio;
 
-string[] find_links(Node node) {
+string[] findLinks(Node node) {
     string[] links;
 
     if (node.type != Node.Type.ELEMENT) {
@@ -18,7 +18,7 @@ string[] find_links(Node node) {
     }
 
     foreach(child; element.children) {
-        links ~= find_links(child);
+        links ~= findLinks(child);
     }
 
     return links;
@@ -43,7 +43,7 @@ int main(string[] argv) {
     }
 
     gumbo.parse.Output output = gumbo.parse.Output.fromFile(filename);
-    foreach(link; find_links(output.root)) {
+    foreach(link; findLinks(output.root)) {
         writeln(link);
     }
     output.destroy();
