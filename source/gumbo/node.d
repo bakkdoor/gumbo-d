@@ -48,19 +48,19 @@ public:
 
         switch(cast(Type)node.type) {
             case Type.DOCUMENT:
-            return new Document(node);
+                return new Document(node);
             case Type.ELEMENT:
-            return new Element(node);
+                return new Element(node);
             case Type.TEXT:
-            return new Text(node);
+                return new Text(node);
             case Type.CDATA:
-            return new Text(node);
+                return new Text(node);
             case Type.COMMENT:
-            return new Text(node);
+                return new Text(node);
             case Type.WHITESPACE:
-            return new Text(node);
+                return new Text(node);
             default:
-            return null;
+                return null;
         }
     }
 }
