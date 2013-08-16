@@ -12,8 +12,7 @@ string[] find_links(Node node) {
     Element element = cast(Element) node;
 
     if (element.tag == Element.Tag.A) {
-        Attribute href = element.getAttribute("href");
-        if(href) {
+        if(Attribute href = element.getAttribute("href")) {
             links ~= href.value;
         }
     }
