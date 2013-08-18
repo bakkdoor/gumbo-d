@@ -7,7 +7,7 @@ string findTitle(Node root)
     if(!titleElem)
         return "<no title found>";
 
-    Text title = titleElem.findChild!(Text)(e => e.type == Node.Type.TEXT);
+    Text title = titleElem.findChild!(Text);
     if(title)
         return title.text;
     else

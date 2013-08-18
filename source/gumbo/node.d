@@ -65,6 +65,21 @@ public:
         return null;
     }
 
+    T findChild(T)()
+    {
+        foreach(child; children) {
+            T c = cast(T)child;
+            if(c) {
+                return c;
+            }
+
+            if(T innerChild = child.findChild!(T))
+                return innerChild;
+        }
+        return null;
+    }
+
+
     static Node fromCAPI(GumboNode * node)
     {
         if(!node)
