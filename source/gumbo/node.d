@@ -15,8 +15,9 @@ class Node {
         WHITESPACE
     };
 
-private:
+protected:
     GumboNode * _node;
+    Node[]      _children;
 
 public:
     this(GumboNode * node)
@@ -42,6 +43,26 @@ public:
     GumboParseFlags parseFlags()
     {
         return _node.parse_flags;
+    }
+
+    Node[] children()
+    {
+        return _children;
+    }
+
+    T findChild(T)(bool delegate(T) predicate)
+    {
+        foreach(child; children) {
+            T c = cast(T)child;
+            if(c) {
+                if(predicate(c))
+                    return c;
+
+                if(T innerChild = c.findChild!(T)(predicate))
+                    return innerChild;
+            }
+        }
+        return null;
     }
 
     static Node fromCAPI(GumboNode * node)
@@ -128,8 +149,6 @@ class Document : Node {
 private:
     GumboDocument * _doc;
 
-    Node[] _children;
-
     string _name;
     string _publicIdentifier;
     string _systemIdentifier;
@@ -148,11 +167,6 @@ public:
         _name = text(_doc.name);
         _publicIdentifier = text(_doc.public_identifier);
         _systemIdentifier = text(_doc.system_identifier);
-    }
-
-    Node[] children()
-    {
-        return _children;
     }
 
     bool hasDoctype()
@@ -200,9 +214,7 @@ class Element : Node {
         SPACER, TT, U, UNKNOWN, LAST,
     };
 
-    GumboElement * _element;
-
-    Node[] _children;
+    GumboElement *    _element;
     Attribute[string] _attributes;
 
 public:
@@ -221,11 +233,6 @@ public:
             Attribute attr = new Attribute(cast(GumboAttribute*)_element.attributes.data[i]);
             _attributes[attr.name()] = attr;
         }
-    }
-
-    Node[] children()
-    {
-        return _children;
     }
 
     Attribute[string] attributes()
@@ -268,7 +275,6 @@ public:
     {
         return _element.end_pos;
     }
-
 }
 
 class Text : Node {
