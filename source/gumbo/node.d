@@ -68,10 +68,8 @@ public:
     T findChild(T)()
     {
         foreach(child; children) {
-            T c = cast(T)child;
-            if(c) {
+            if(T c = cast(T)child)
                 return c;
-            }
 
             if(T innerChild = child.findChild!(T))
                 return innerChild;
