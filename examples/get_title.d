@@ -3,11 +3,11 @@ import std.stdio;
 
 string findTitle(Node root)
 {
-    Element titleElem = root.findChild!(Element)(e => e.tag == Element.Tag.TITLE);
+    Element titleElem = root.findChild!Element(e => e.tag == Element.Tag.TITLE);
     if(!titleElem)
         return "<no title found>";
 
-    Text title = titleElem.findChild!(Text);
+    Text title = titleElem.findChild!Text;
     if(title)
         return title.text;
     else

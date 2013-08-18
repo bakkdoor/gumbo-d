@@ -58,7 +58,7 @@ public:
                 if(predicate(c))
                     return c;
 
-                if(T innerChild = c.findChild!(T)(predicate))
+                if(T innerChild = c.findChild!T(predicate))
                     return innerChild;
             }
         }
@@ -71,7 +71,7 @@ public:
             if(T c = cast(T)child)
                 return c;
 
-            if(T innerChild = child.findChild!(T))
+            if(T innerChild = child.findChild!T)
                 return innerChild;
         }
         return null;
