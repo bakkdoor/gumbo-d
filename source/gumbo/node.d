@@ -77,6 +77,31 @@ public:
         return null;
     }
 
+    T[] findChildren(T)(bool delegate(T) predicate)
+    {
+        T[] found;
+        foreach(child; children) {
+            T c = cast(T)child;
+            if(c && predicate(c))
+                found ~= c;
+
+            found ~= child.findChildren!T(predicate);
+        }
+        return found;
+    }
+
+    T[] findChildren(T)()
+    {
+        T[] found;
+        foreach(child; children) {
+            if(T c = cast(T)child)
+                found ~= c;
+
+            found ~= child.findChildren!T;
+        }
+        return found;
+    }
+
     T[] mapChildren(T)(T function(Node) fun)
     {
         T[] vals;

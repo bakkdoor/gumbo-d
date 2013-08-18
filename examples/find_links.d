@@ -1,23 +1,14 @@
 import gumbo.node, gumbo.parse;
-
 import std.stdio;
 
-string[] findLinks(Node node) {
+string[] findLinks(Node root)
+{
     string[] links;
 
-    if (node.type != Node.Type.ELEMENT) {
-        return links;
-    }
-
-    Element element = cast(Element) node;
-
-    if (element.tag == Element.Tag.A) {
-        if(Attribute href = element.getAttribute("href")) {
+    foreach(link; root.findChildren!Element(e => e.tag == Element.Tag.A)) {
+        if(auto href = link.getAttribute("href"))
             links ~= href.value;
-        }
     }
-
-    links ~= element.flatMapChildren(&findLinks);
 
     return links;
 }
