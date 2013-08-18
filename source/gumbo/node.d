@@ -86,7 +86,25 @@ public:
         return vals;
     }
 
+    T[] mapChildren(T)(T delegate(Node) fun)
+    {
+        T[] vals;
+        foreach(child; children) {
+            vals ~= fun(child);
+        }
+        return vals;
+    }
+
     T[] flatMapChildren(T)(T[] function(Node) fun)
+    {
+        T[] vals;
+        foreach(child; children) {
+            vals ~= fun(child);
+        }
+        return vals;
+    }
+
+    T[] flatMapChildren(T)(T[] delegate(Node) fun)
     {
         T[] vals;
         foreach(child; children) {

@@ -17,9 +17,7 @@ string[] findLinks(Node node) {
         }
     }
 
-    foreach(child; element.children) {
-        links ~= findLinks(child);
-    }
+    links ~= element.flatMapChildren(&findLinks);
 
     return links;
 }
