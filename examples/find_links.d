@@ -31,7 +31,7 @@ int main(string[] argv) {
         return 1;
     }
 
-    gumbo.parse.Output output = gumbo.parse.Output.fromFile(filename);
+    auto output = gumbo.parse.Output.fromFile(filename);
     foreach(link; findLinks(output.root)) {
         writeln(link);
     }
