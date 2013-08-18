@@ -77,6 +77,23 @@ public:
         return null;
     }
 
+    T[] mapChildren(T)(T function(Node) fun)
+    {
+        T[] vals;
+        foreach(child; children) {
+            vals ~= fun(child);
+        }
+        return vals;
+    }
+
+    T[] flatMapChildren(T)(T[] function(Node) fun)
+    {
+        T[] vals;
+        foreach(child; children) {
+            vals ~= fun(child);
+        }
+        return vals;
+    }
 
     static Node fromCAPI(GumboNode * node)
     {
