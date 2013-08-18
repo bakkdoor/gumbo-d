@@ -54,13 +54,11 @@ public:
     {
         foreach(child; children) {
             T c = cast(T)child;
-            if(c) {
-                if(predicate(c))
-                    return c;
+            if(c && predicate(c))
+                return c;
 
-                if(T innerChild = c.findChild!T(predicate))
-                    return innerChild;
-            }
+            if(T innerChild = child.findChild!T(predicate))
+                return innerChild;
         }
         return null;
     }
