@@ -41,7 +41,6 @@ string findTitle(Element element)
     return "<no title found>";
 }
 
-
 void usage()
 {
     stderr.writeln("Usage: get_title <html filename>");
