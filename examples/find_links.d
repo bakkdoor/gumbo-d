@@ -1,4 +1,4 @@
-import gumbo.node, gumbo.capi, gumbo.parse;
+import gumbo.node, gumbo.parse;
 
 import std.stdio;
 
