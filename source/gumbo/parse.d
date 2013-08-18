@@ -8,13 +8,20 @@ import std.file : readText;
 class Output {
 private:
     GumboOutput* _output;
-    Node _root;
+    Node         _document;
+    Node         _root;
 
 public:
     this(GumboOutput* output)
     {
-        _output = output;
-        _root = Node.fromCAPI(_output.root);
+        _output   = output;
+        _document = Node.fromCAPI(_output.document);
+        _root     = Node.fromCAPI(_output.root);
+    }
+
+    Node document()
+    {
+        return _document;
     }
 
     Node root() {
