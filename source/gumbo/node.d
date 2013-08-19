@@ -7,12 +7,12 @@ import std.stdio;
 
 class Node {
     enum Type {
-        DOCUMENT,
-        ELEMENT,
-        TEXT,
-        CDATA,
-        COMMENT,
-        WHITESPACE
+        document,
+        element,
+        text,
+        cdata,
+        comment,
+        whitespace
     };
 
 protected:
@@ -124,17 +124,17 @@ public:
             return null;
 
         switch(cast(Type)node.type) {
-            case Type.DOCUMENT:
+            case Type.document:
                 return new Document(node);
-            case Type.ELEMENT:
+            case Type.element:
                 return new Element(node);
-            case Type.TEXT:
+            case Type.text:
                 return new Text(node);
-            case Type.CDATA:
+            case Type.cdata:
                 return new Text(node);
-            case Type.COMMENT:
+            case Type.comment:
                 return new Text(node);
-            case Type.WHITESPACE:
+            case Type.whitespace:
                 return new Text(node);
             default:
                 return null;
@@ -250,21 +250,21 @@ public:
 
 class Element : Node {
     enum Tag {
-        HTML, HEAD, TITLE, BASE, LINK, META, STYLE, SCRIPT, NOSCRIPT, BODY,
-        SECTION, NAV, ARTICLE, ASIDE, H1, H2, H3, H4, H5, H6, HGROUP, HEADER,
-        FOOTER, ADDRESS, P, HR, PRE, BLOCKQUOTE, OL, UL, LI, DL, DT, DD,
-        FIGURE, FIGCAPTION, DIV, A, EM, STRONG, SMALL, S, CITE, Q, DFN, ABBR,
-        TIME, CODE, VAR, SAMP, KBD, SUB, SUP, I, B, MARK, RUBY, RT, RP, BDI,
-        BDO, SPAN, BR, WBR, INS, DEL, IMAGE, IMG, IFRAME, EMBED, OBJECT, PARAM,
-        VIDEO, AUDIO, SOURCE, TRACK, CANVAS, MAP, AREA, MATH, MI, MO, MN, MS,
-        MTEXT, MGLYPH, MALIGNMARK, ANNOTATION_XML, SVG, FOREIGNOBJECT, DESC,
-        TABLE, CAPTION, COLGROUP, COL, TBODY, THEAD, TFOOT, TR, TD, TH, FORM,
-        FIELDSET, LEGEND, LABEL, INPUT, BUTTON, SELECT, DATALIST, OPTGROUP,
-        OPTION, TEXTAREA, KEYGEN, OUTPUT, PROGRESS, METER, DETAILS, SUMMARY,
-        COMMAND, MENU, APPLET, ACRONYM, BGSOUND, DIR, FRAME, FRAMESET,
-        NOFRAMES, ISINDEX, LISTING, XMP, NEXTID, NOEMBED, PLAINTEXT, RB,
-        STRIKE, BASEFONT, BIG, BLINK, CENTER, FONT, MARQUEE, MULTICOL, NOBR,
-        SPACER, TT, U, UNKNOWN, LAST,
+        html, head, title, base, link, meta, style, script, noscript, body_,
+        section, nav, article, aside, h1, h2, h3, h4, h5, h6, hgroup, header,
+        footer, address, p, hr, pre, blockquote, ol, ul, li, dl, dt, dd,
+        figure, figcaption, div, a, em, strong, small, s, cite, q, dfn, abbr,
+        time, code, var, samp, kbd, sub, sup, i, b, mark, ruby, rt, rp, bdi,
+        bdo, span, br, wbr, ins, del, image, img, iframe, embed, object, param,
+        video, audio, source, track, canvas, map, area, math, mi, mo, mn, ms,
+        mtext, mglyph, malignmark, annotationXML, svg, foreignObject, desc,
+        table, caption, colgroup, col, tbody, thead, tfoot, tr, td, th, form,
+        fieldset, legend, label, input, button, select, datalist, optgroup,
+        option, textarea, keygen, output, progress, meter, details, summary,
+        command, menu, applet, acronym, bgsound, dir, frame, frameset,
+        noFrames, isIndex, listing, xmp, nextId, noEmbed, plainText, rb,
+        strike, baseFont, big, blink, center, font, marquee, multicol, nobr,
+        spacer, tt, u, unknown, last,
     };
 
     GumboElement *    _element;

@@ -5,7 +5,7 @@ string[] findLinks(Node root)
 {
     string[] links;
 
-    foreach(link; root.findChildren!Element(e => e.tag == Element.Tag.A)) {
+    foreach(link; root.findChildren!Element(e => e.tag == Element.Tag.a)) {
         if(auto href = link.getAttribute("href"))
             links ~= href.value;
     }

@@ -3,7 +3,7 @@ import std.stdio;
 
 string findTitle(Node root)
 {
-    Element titleElem = root.findChild!Element(e => e.tag == Element.Tag.TITLE);
+    Element titleElem = root.findChild!Element(e => e.tag == Element.Tag.title);
     if(!titleElem)
         return "<no title found>";
 
