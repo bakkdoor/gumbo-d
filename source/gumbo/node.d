@@ -299,9 +299,9 @@ public:
         return null;
     }
 
-    GumboTag tag()
+    Tag tag()
     {
-        return _element.tag;
+        return cast(Tag)_element.tag;
     }
 
     GumboNamespaceEnum tagNamespace()
